@@ -2,8 +2,12 @@ package jarvis;
 
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
+import jarvis.data.JarvisDatabase;
 import jarvis.data.JarvisEdge;
 import jarvis.data.JarvisGraph;
 import jarvis.data.JarvisNode;
@@ -79,6 +83,28 @@ public class JarvisActionKeyword {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Reset the system to it initial state.
+	 * @return True if executed, false if not and null if error.
+	 */
+	public Boolean reset() {
+		JarvisDatabase database = new JarvisDatabase();
+		if (database.connect()) {
+			try {
+				String query = "DELETE FROM edges";
+				PreparedStatement statement = database.getConnection().prepareStatement(query);
+				statement.executeUpdate();
+				query = "DELETE FROM nodes";
+				statement = database.getConnection().prepareStatement(query);
+				statement.executeUpdate();
+				return true;
+			} catch (SQLException ex) {
+				System.err.println(ex.getMessage());
+			}
+		}
+		return null;
 	}
 	
 }

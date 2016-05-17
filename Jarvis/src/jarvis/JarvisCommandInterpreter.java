@@ -47,7 +47,7 @@ public class JarvisCommandInterpreter {
 	 * @return Response or null if no reserved keyword process.
 	 */
 	private String processReservedKeywords(String command) {
-		if (command.startsWith("jadd")) {
+		if (command.startsWith("jadd")) { // Add keyword/command
 			String[] splits = command.split("->");
 			String key = splits[0].substring("jadd ".length()).trim();
 			String cmd = splits[1].substring(1);
@@ -58,6 +58,13 @@ public class JarvisCommandInterpreter {
 				return "Keyword added";
 			} else {
 				return "Keyword already present";
+			}
+		} else if (command.startsWith("jreset")) { // Reset all
+			Boolean res = m_jarvis.getActionKeyword().reset();
+			if (res == null) {
+				return "Error resetting";
+			} else if (res) {
+				return "Reset complete";
 			}
 		}
 		return null;
