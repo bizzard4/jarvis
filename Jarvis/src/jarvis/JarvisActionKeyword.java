@@ -3,7 +3,6 @@ package jarvis;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -74,7 +73,7 @@ public class JarvisActionKeyword {
 			}
 			for (JarvisNode cmd : cmds) {
 				try {
-					Process p = Runtime.getRuntime().exec(cmd.getData());
+					Runtime.getRuntime().exec(cmd.getData());
 				} catch (IOException e) {
 					System.err.println(e.getMessage());
 					return null;

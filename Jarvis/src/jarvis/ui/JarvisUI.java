@@ -22,6 +22,11 @@ import jarvis.JarvisCommandInterpreter;
  */
 public class JarvisUI extends JFrame implements KeyListener {
 	
+	/**
+	 * Serial ID generated.
+	 */
+	private static final long serialVersionUID = 4692124173177754922L;
+
 	private JarvisCommandInterpreter m_interpreter;
 	
 	private DefaultListModel<String> m_logs = null;

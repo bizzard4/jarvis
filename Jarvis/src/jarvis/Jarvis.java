@@ -1,8 +1,6 @@
 package jarvis;
 
 import jarvis.ui.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
 
 import javax.swing.JOptionPane;
 
