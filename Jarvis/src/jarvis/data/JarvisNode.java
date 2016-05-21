@@ -1,5 +1,7 @@
 package jarvis.data;
 
+import java.util.Date;
+
 /**
  * Class representing a data node.
  * @see JarvisGraph
@@ -11,6 +13,8 @@ public class JarvisNode {
 	private int m_nodeId;
 	private String m_data;
 	private String m_type;
+	private Date m_creation;
+	private Date m_modified;
 	
 	/**
 	 * Constructor.
@@ -18,10 +22,12 @@ public class JarvisNode {
 	 * @param type Node type.
 	 * @param data Node data.
 	 */
-	public JarvisNode(int id, String type, String data) {
+	public JarvisNode(int id, String type, String data, Date creation, Date modified) {
 		m_nodeId = id;
 		m_data = data;
 		m_type = type;
+		m_creation = creation;
+		m_modified = modified;
 	}
 	
 	public int getNodeId() {
@@ -34,5 +40,13 @@ public class JarvisNode {
 	
 	public String getType() {
 		return m_type;
+	}
+	
+	public Date getCreation() {
+		return m_creation;
+	}
+	
+	public Date getModified() {
+		return m_modified;
 	}
 }
