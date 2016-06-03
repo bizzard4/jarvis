@@ -23,8 +23,8 @@ public class JarvisDevTools {
 	 * @param scriptPath Script path.
 	 * @throws IOException Exception.
 	 */
-	public void runScript(String scriptPath) throws IOException {
-	      Process p = Runtime.getRuntime().exec("psql -d jarvis -U jarvis_master -f " + scriptPath);
+	public void runScript(String scriptPath, String database) throws IOException {
+	      Process p = Runtime.getRuntime().exec("psql -d " + database + " -U jarvis_master -f " + scriptPath);
 	      BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
 	      BufferedReader error = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 	      boolean something = true;
@@ -54,7 +54,7 @@ public class JarvisDevTools {
 		// Execute database initialization script
 		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 		try {
-			dev.runScript("script/createtable.sql");
+			dev.runScript("script/createtable.sql", args[0]);
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Error executing script : " + e.getMessage());
