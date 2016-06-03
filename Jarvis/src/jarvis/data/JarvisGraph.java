@@ -105,7 +105,7 @@ public class JarvisGraph {
 	/**
 	 * Add a node to the graph. This method doesn't validate is node already exist.
 	 * @param type Node type.
-	 * @param data Data in node.
+	 * @param data Data in node in XML format.
 	 * @return Return inserted node or null if operation failed.
 	 */
 	public JarvisNode addNode(String type, String data) {

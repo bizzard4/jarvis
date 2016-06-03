@@ -11,6 +11,10 @@ import java.util.Date;
 public class JarvisNode {
 	
 	private int m_nodeId;
+	
+	/**
+	 * Node data is stored as XML.
+	 */
 	private String m_data;
 	private String m_type;
 	private Date m_creation;
