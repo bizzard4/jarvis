@@ -1,11 +1,9 @@
 # Jarvis
-Your personal AI
+Your personal AI.
 
-## Commands
+## Features progress
 
-- Add a command : jadd keyword -> cmd
-- Execute a command : keyword
+- Keyword/Action : done
+- Personal data carrier : next projected
 
-Example:
-- jadd c -> calc
-- c
+Documentation in wiki.
