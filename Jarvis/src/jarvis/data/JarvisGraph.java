@@ -48,7 +48,7 @@ public class JarvisGraph {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Get the list of nodes connected to the given node. List could be empty.
 	 * @param node Entry point node.
