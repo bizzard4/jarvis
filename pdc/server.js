@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+app.use('/dashboard', express.static('public'));
 
 // Server creation
 var server = app.listen(8081, function() {
@@ -19,11 +20,6 @@ var server = app.listen(8081, function() {
 // GET on /
 app.get('/', function(req, res) {
 	res.end("Jarvis PDC web service");
-});
-
-// Dashboard GET
-app.get('/dashboard', function(req, res) {
-	res.end("PDC dashboard - Placeholder");
 });
 
 // Available ws methods
