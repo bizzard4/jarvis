@@ -1,0 +1,1 @@
+DROP VIEW IF EXISTS entries_per_subject;

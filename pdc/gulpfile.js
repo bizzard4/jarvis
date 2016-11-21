@@ -18,6 +18,10 @@ gulp.task("copy", ["bundle"], function () {
         .pipe(gulp.dest("public"));
 });
 
-gulp.task("default",["copy"],function(){
+gulp.task("watch", function() {
+	gulp.watch("./app/dashboard/*.*", ["copy"]);
+});
+
+gulp.task("default",["copy", "watch"],function(){
    console.log("Gulp completed..."); 
 });

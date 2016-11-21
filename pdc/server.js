@@ -23,48 +23,20 @@ app.get('/', function(req, res) {
 });
 
 // Available ws methods
-// - tag/t
-// - addInfo
-// - deleteInfo
-// - addTag
-// - tags
+// - subjects
+// - subject :s
 
-// List all INFO nodes for tag t
-app.get('/tag/:t', function(req, res) {
-	pdc.getInfos(req.params.t, function(err, result) {
+// List all entries from a subject
+app.get('/subject/:s', function(req, res) {
+	pdc.getEntries(req.params.s, function(err, result) {
 		if (err) return processError(err, res);
 		responseJSONResult(result, res);
 	});
 });
 
-// Add an INFO node
-app.put('/tag/:t/addInfo', function(req, res) {
-	pdc.addInfo(req.params.t, req.body.data, function(err, result) {
-		if (err) return processError(err, res);
-		res.end("Info added");
-	});
-});
-
-// Delete an INFO node
-app.delete('/deleteInfo/:i', function(req, res) {
-	res.end("Not supported for now");
-	//pdc.deleteInfo(req.params.i, function(err, result) {
-	//	if (err) return processError(err, res);
-	//	res.end("Info deleted");
-	//});
-});
-
-// Add a TAG node
-app.put('/addTag', function(req, res) {
-	pdc.addTag(req.body.data, function(err, result) {
-		if (err) return processError(err, res);
-		res.end("Tag added");
-	});
-});
-
-// List all TAG nodes
-app.get('/tags', function(req, res) {
-	pdc.getTags(function(err, result) {
+// List all subject
+app.get('/subjects', function(req, res) {
+	pdc.getSubjects(function(err, result) {
 		if (err) return processError(err, res);
 		responseJSONResult(result, res);
 	});

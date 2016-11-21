@@ -1,0 +1,1 @@
+psql -f insert_test_data.sql jarvis_pdc jarvis_master
