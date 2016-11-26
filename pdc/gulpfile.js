@@ -1,27 +1,19 @@
-var gulp = require("gulp");
-var browserify = require("browserify");
-var reactify = require("reactify");
-var source = require("vinyl-source-stream");
+var gulp = require('gulp');
+var browserify = require('browserify');
+var babelify = require('babelify');
+var source = require('vinyl-source-stream');
 
-gulp.task("bundle", function () {
-    return browserify({
-        entries: "./app/dashboard/main.jsx",
-        debug: true
-    }).transform(reactify)
+gulp.task('build', function () {
+    return browserify({entries: './app/dashboard/main.jsx', extensions: ['.jsx'], debug: true})
+        .transform('babelify', {presets: ['es2015', 'react']})
         .bundle()
-        .pipe(source("main.js"))
-        .pipe(gulp.dest("public"))
+        .on('error', function(err) { console.error(err); this.emit('end'); })
+        .pipe(source('main.js'))
+        .pipe(gulp.dest('public'));
 });
 
-gulp.task("copy", ["bundle"], function () {
-    return gulp.src(["app/dashboard/index.html","lib/bootstrap-css/css/bootstrap.min.css","app/dashboard/style.css"])
-        .pipe(gulp.dest("public"));
+gulp.task('watch', ['build'], function () {
+    gulp.watch('./app/dashboard/*.jsx', ['build']);
 });
 
-gulp.task("watch", function() {
-	gulp.watch("./app/dashboard/*.*", ["copy"]);
-});
-
-gulp.task("default",["copy", "watch"],function(){
-   console.log("Gulp completed..."); 
-});
+gulp.task('default', ['watch']);
