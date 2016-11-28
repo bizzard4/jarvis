@@ -23,32 +23,71 @@ app.get('/', function(req, res) {
 });
 
 // Available ws methods
-// - subjects
-// - subject :s
+// Subject : add subject , get all entries, get all subjects
+// Entries : get an entry, add entry, delete entry
 
-// List all entries from a subject
-app.get('/subject/:s', function(req, res) {
-	pdc.getEntries(req.params.s, function(err, result) {
+// ---------- Entries ----------
+
+// DELETE an entry
+app.delete("/entry/:t", function(req, res) {
+	pdc.deleteEntry(req.params.t, function(err, result) {
 		if (err) return processError(err, res);
-		responseJSONResult(result, res);
+		responseJSONResult(result, res, 200);
 	});
 });
 
-// List all subject
-app.get('/subjects', function(req, res) {
+// POST an entry
+app.post("/entry", function(req, res) {
+	pdc.addEntry(req.body.entry, function(err, result) {
+		if (err) return processError(err, res);
+		responseJSONResult(result, res, 201);
+	});
+});
+
+// GET an entry
+app.get("/entry/:entry_id", function(req, res) {
+	pdc.getEntry(req.params.entry_id, function(err, result) {
+		if (err) return processError(err, res);
+		responseJSONResult(result, res, 201);
+	});
+});
+
+// ---------- Subjects ----------
+
+// POST a subject
+app.post('/subject', function(req, res) {
+	pdc.addSubject(req.body.subject, function(err, result) {
+		if (err) return processError(err, res);
+		responseJSONResult(result, res, 201);
+	});
+});
+
+// GET entries for a subject
+app.get('/subject/:subject_id', function(req, res) {
+	pdc.getEntries(req.params.subject_id, function(err, result) {
+		if (err) return processError(err, res);
+		responseJSONResult(result, res, 200);
+	});
+});
+
+// GET all subjects
+app.get('/subject', function(req, res) {
 	pdc.getSubjects(function(err, result) {
 		if (err) return processError(err, res);
-		responseJSONResult(result, res);
+		responseJSONResult(result, res, 200);
 	});
 });
 
+//---------- Utils ----------
+
 // Method to return JSON result to client
-var responseJSONResult = function(json, response) {
-	response.writeHead(200, {'content-type':'application/json', 'content-length':Buffer.byteLength(json)}); 
+var responseJSONResult = function(json, response, return_code) {
+	response.writeHead(return_code, {'content-type':'application/json', 'content-length':Buffer.byteLength(json)}); 
 	response.end(json);
 };
 
 // In case of error
+// TODO : Error code https://github.com/bizzard4/jarvis/issues/2
 var processError = function(error, response) {
 	console.error(error);
 	response.end("Error");
